@@ -21,12 +21,26 @@ const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
   },
 }));
 
-function CustomizedProgressBar() {
+function CustomizedProgressBar(props) {
+
+  const {goal,dailyCalories}= props;
+
+  const goalPercentCompleted = () => {
+    const percentageCompletion=(dailyCalories/goal)*100;
+    if(percentageCompletion > 100){
+      return 100;
+    }
+    else{
+      return percentageCompletion;
+    }
+  }
+
   return (
     <Stack spacing={2} sx={{ flexGrow: 1 }}>
         <h3>Total Calories</h3>
-        <h4>1800</h4>
-     <BorderLinearProgress variant="determinate" value={50} />
+        <h4>{dailyCalories}</h4>
+     <BorderLinearProgress variant="determinate" value={goalPercentCompleted()} />
+     <h4 style={{ textAlign: 'end' }}>Goal {goal}</h4>
     </Stack>
   );
 }
