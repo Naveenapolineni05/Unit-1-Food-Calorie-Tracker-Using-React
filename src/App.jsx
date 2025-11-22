@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Home from "./components/Home.jsx";
-import AddEditMeal from "./components/AddEditMeal.jsx";
+import AddEditMeal from "./components/addEditMeal.jsx";
 import Progress from "./components/progress.jsx";
 import Settings from "./components/settings.jsx";
 import { Routes, Route } from 'react-router-dom';
@@ -24,6 +24,13 @@ function App() {
            console.log("updatedData", updatedDataSet)
         }
     }, [meal]);
+
+    const resetData = () => {
+        setCalorieGoal(2000);
+        setMeal({});
+        setDataSet([]);
+    }
+
     return (
         <div>
             <h1>Food-Calorie Tracker</h1>
@@ -31,7 +38,7 @@ function App() {
                 <Route path="/" element={<Home goal={calorieGoal} meal={meal} />} />
                 <Route path="/edit" element={<AddEditMeal mealTypes={mealOptions} setMeal={setMeal} meal={meal} />} />
                 <Route path="/progress" element={<Progress dataSet={dataSet} goal={calorieGoal} meal={meal}/>} />
-                <Route path="/settings" element={<Settings updateCalorieGoal={setCalorieGoal} calorieGoal={calorieGoal} />} />
+                <Route path="/settings" element={<Settings updateCalorieGoal={setCalorieGoal} calorieGoal={calorieGoal} resetData={resetData}/>} />
             </Routes>
         </div>
     );
