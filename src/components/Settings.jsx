@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Button from '@mui/material/Button';
@@ -7,12 +7,16 @@ import { Link } from "react-router-dom";
 
 function Settings(props) {
 
-    const {updateCalorieGoal,calorieGoal} = props;
+    const { updateCalorieGoal, calorieGoal, resetData } = props;
 
     const [goal, setGoal] = useState(calorieGoal);
+    const [isError, setIsError] = useState(false);
 
     const handleCalorieChange = (event) => {
         setGoal(event.target.value);
+
+        const hasLetters = /[^0-9]/.test(event.target.value);
+        setIsError(hasLetters);
     };
 
     const handleCalorieUpdate = () => {
@@ -25,10 +29,11 @@ function Settings(props) {
             <TextField
                 id="Calorie Goal"
                 label="Calorie Goal"
-                helperText="Please enter the Calorie Goal"
+                helperText={isError ? "Numbers only" : "Please enter your Calorie Goal"}
                 fullWidth
                 value={goal}
                 onChange={handleCalorieChange}
+                error={isError}
 
             />
 
@@ -42,8 +47,11 @@ function Settings(props) {
                     Save
                 </Button>
                 <Button
+                    component={Link}
+                    to="/progress"
                     variant="contained"
-                    color="error">
+                    color="error"
+                    onClick={resetData}>
                     Reset Data
                 </Button>
                 <Button

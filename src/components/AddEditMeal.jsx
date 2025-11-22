@@ -104,6 +104,7 @@ function AddEditMeal(props) {
                 label="Calories"
                 helperText="Please enter the Calories"
                 fullWidth
+                type="Number"
                 value={calories}
                 onChange={handleCaloriesChange}
             />
