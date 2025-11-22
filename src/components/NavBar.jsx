@@ -6,32 +6,45 @@ import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import RestaurantOutlinedIcon from '@mui/icons-material/RestaurantOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import { Link } from "react-router-dom";
 
 function NavBar() {
-
   const [value, setValue] = React.useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-
-  }
-
   return (
-    <Box>
+    <Box sx={{ width: '100%' }}>
       <BottomNavigation
         showLabels
         value={value}
-        onChange={handleChange}
+        onChange={(event, newValue) => setValue(newValue)}
       >
-        <BottomNavigationAction label="Home" icon={<HomeOutlinedIcon />} />
-        <BottomNavigationAction label="Add Meal" icon={<RestaurantOutlinedIcon />} />
-        <BottomNavigationAction label="Progress" icon={<CheckCircleOutlineOutlinedIcon />} />
-        <BottomNavigationAction label="Settings" icon={<SettingsOutlinedIcon />} />
-
+        <BottomNavigationAction
+          component={Link}
+          to="/"
+          label="Home"
+          icon={<HomeOutlinedIcon />}
+        />
+        <BottomNavigationAction
+          component={Link}
+          to="/edit"
+          label="Add Meal"
+          icon={<RestaurantOutlinedIcon />}
+        />
+        <BottomNavigationAction
+          component={Link}
+          to="/progress"
+          label="Progress"
+          icon={<CheckCircleOutlineOutlinedIcon />}
+        />
+        <BottomNavigationAction
+          component={Link}
+          to="/settings"
+          label="Settings"
+          icon={<SettingsOutlinedIcon />}
+        />
       </BottomNavigation>
     </Box>
   );
-
 }
 
 export default NavBar;
