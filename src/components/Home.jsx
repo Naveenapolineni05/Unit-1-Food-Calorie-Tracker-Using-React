@@ -3,24 +3,35 @@ import NavBar from "./NavBar";
 import CustomizedProgressBar from "./CustomizedProgressBar";
 import TextField from '@mui/material/TextField';
 import Stack from "@mui/material/Stack";
+import Grid from '@mui/material/Grid';
 
-function Home() {
 
+function Home(props) {
+    const { goal, meal } = props;
     const mealOptions = ["BreakFast", "Lunch", "Snacks", "Dinner"];
 
+    const totalCalories = () => {
+        const breakfastCalories = Number(meal.breakfast) || 0;
+        const lunchCalories = Number(meal.lunch) || 0;
+        const snacksCalories = Number(meal.snacks) || 0;
+        const dinnerCalories = Number(meal.dinner) || 0;
+        return breakfastCalories + lunchCalories + snacksCalories + dinnerCalories;
+
+    }
+
     return (
-        <div>
+        <Stack spacing={2} alignItems="strech">
             <NavBar />
             <h2> Daily Summary </h2>
-            <CustomizedProgressBar />
-            <br />
-            <Stack spacing={2}>
-                {mealOptions.map(meal =>
-                    <div key={meal}>
+            <CustomizedProgressBar goal={goal} dailyCalories={totalCalories()} />
+            <Stack spacing={2} alignItems="strech">
+                {mealOptions.map(mealOption =>
+                    <div key={mealOption}>
                         <TextField
-                            id={meal}
-                            label={meal}
-                            defaultValue="0 Calories"
+                            id={mealOption}
+                            label={mealOption}
+                            fullWidth
+                            defaultValue={meal[mealOption.toLowerCase()]}
                             slotProps={{
                                 input: {
                                     readOnly: true,
@@ -30,7 +41,8 @@ function Home() {
                     </div>
                 )}
             </Stack>
-        </div>
+        </Stack>
+
     )
 
 }
