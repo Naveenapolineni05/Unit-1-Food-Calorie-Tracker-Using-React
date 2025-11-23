@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Home from "./components/Home.jsx";
+import Home from "./components/home.jsx";
 import AddEditMeal from "./components/addEditMeal.jsx";
 import Progress from "./components/progress.jsx";
 import Settings from "./components/settings.jsx";
