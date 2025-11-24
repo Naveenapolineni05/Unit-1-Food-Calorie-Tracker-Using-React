@@ -3,6 +3,8 @@ import Home from "./components/home.jsx";
 import AddEditMeal from "./components/addEditMeal.jsx";
 import Progress from "./components/progress.jsx";
 import Settings from "./components/settings.jsx";
+import About from "./components/About.jsx";
+import Header from "./components/Header.jsx";
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -11,17 +13,16 @@ function App() {
     const [meal, setMeal] = useState({});
     const [dataSet, setDataSet] = useState([]);
     useEffect(() => {
-        const index=dataSet?.findIndex(d =>d.day === meal.day);
-        
-        if (index === -1)
-        {
-            setDataSet([...dataSet,meal]);
+        const index = dataSet?.findIndex(d => d.day === meal.day);
+
+        if (index === -1) {
+            setDataSet([...dataSet, meal]);
         }
-        else{
-           const updatedDataSet = [...dataSet];
-           updatedDataSet[index] = meal;
-           setDataSet(updatedDataSet);
-           console.log("updatedData", updatedDataSet)
+        else {
+            const updatedDataSet = [...dataSet];
+            updatedDataSet[index] = meal;
+            setDataSet(updatedDataSet);
+            console.log("updatedData", updatedDataSet)
         }
     }, [meal]);
 
@@ -33,12 +34,14 @@ function App() {
 
     return (
         <div>
-            <h1>Food-Calorie Tracker</h1>
+            <Header />
+            <br />
             <Routes>
                 <Route path="/" element={<Home goal={calorieGoal} meal={meal} />} />
                 <Route path="/edit" element={<AddEditMeal mealTypes={mealOptions} setMeal={setMeal} meal={meal} />} />
-                <Route path="/progress" element={<Progress dataSet={dataSet} goal={calorieGoal} meal={meal}/>} />
-                <Route path="/settings" element={<Settings updateCalorieGoal={setCalorieGoal} calorieGoal={calorieGoal} resetData={resetData}/>} />
+                <Route path="/progress" element={<Progress dataSet={dataSet} goal={calorieGoal} meal={meal} />} />
+                <Route path="/settings" element={<Settings updateCalorieGoal={setCalorieGoal} calorieGoal={calorieGoal} resetData={resetData} />} />
+                <Route path="/about" element={<About />} />
             </Routes>
         </div>
     );

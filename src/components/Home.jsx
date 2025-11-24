@@ -3,8 +3,6 @@ import NavBar from "./NavBar";
 import CustomizedProgressBar from "./CustomizedProgressBar";
 import TextField from '@mui/material/TextField';
 import Stack from "@mui/material/Stack";
-import Grid from '@mui/material/Grid';
-
 
 function Home(props) {
     const { goal, meal } = props;
